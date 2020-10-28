@@ -8,21 +8,21 @@ import (
 type Aframe struct {
 	js.Value
 	scene    js.Value
-	entities map[string]AEntity
+	entities map[string]*AEntity
 }
 
 var aframe *Aframe
 
 func init() {
 	Aframe := &Aframe{
-		entities: map[string]AEntity{},
+		entities: map[string]*AEntity{},
 	}
 
-	getGlobalAframe()
+	getAframeGlobalRef()
 	scene()
 }
 
-func getGlobalAframe() {
+func getAframeGlobalRef() {
 	a := js.Global().Get("AFRAME")
 	if a.IsUndefined() || a.IsNull() {
 		return
@@ -60,7 +60,7 @@ func GetElementFromSceneById(_id string) (js.Value, error) {
 	return el, nil
 }
 
-func CacheEntity(e AEntity) error {
+func CacheEntity(e *AEntity) error {
 	if _, ok := aframe.entities[e.ID()]; ok {
 		return errors.New("entity already in cache")
 	}
