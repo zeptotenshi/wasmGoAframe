@@ -65,11 +65,11 @@ func CacheEntity(e AEntity) error {
 		return errors.New("entity already in cache")
 	}
 
-	a.entities[e.ID()] = e
+	aframe.entities[e.ID()] = e
 	return nil
 }
 
-func GetCachedEntity(_id string) (AEntity, error) {
+func GetCachedEntity(_id string) (*AEntity, error) {
 	v, ok := aframe.entities[_id]
 	if !ok {
 		return nil, errors.New("entity with given id not found in cache")
