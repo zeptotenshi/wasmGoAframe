@@ -1,4 +1,4 @@
-package aframe
+package goAframe
 
 import (
 	"errors"

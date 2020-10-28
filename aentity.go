@@ -1,6 +1,7 @@
 package goAframe
 
 import (
+	"errors"
 	"syscall/js"
 )
 
