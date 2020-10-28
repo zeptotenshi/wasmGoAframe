@@ -20,7 +20,7 @@ type AEntity struct {
 }
 
 func (e *AEntity) SetPosition(_x, _y, _z float64) error {
-	obj3D := v.Value().Get("object3D")
+	obj3D := e.Value().Get("object3D")
 	if obj3D.IsUndefined() {
 		return errors.New("entity.object3D is undefined")
 	}

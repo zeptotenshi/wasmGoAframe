@@ -8,7 +8,7 @@ import (
 type Aframe struct {
 	js.Value
 	scene    js.Value
-	entities map[string]*AEntity
+	entities map[string]AEntity
 }
 
 var aframe *Aframe
@@ -18,13 +18,13 @@ func init() {
 		entities: map[string]AEntity{},
 	}
 
-	aframe()
+	getGlobalAframe()
 	scene()
 }
 
-func aframe() {
+func getGlobalAframe() {
 	a := js.Global().Get("AFRAME")
-	if a.IsUndefined() || s.IsNull() {
+	if a.IsUndefined() || a.IsNull() {
 		return
 	}
 
@@ -39,13 +39,13 @@ func scene() {
 		doc.Get("body").Call("appendChild", s)
 	}
 
-	Aframe.scene = s
+	aframe.scene = s
 }
 
 // func (a *Aframe) CreateEntity() AEntity {
 // }
 
-func GetEntityFromSceneByID(_id string) (js.Value, error) {
+func GetElementFromSceneById(_id string) (js.Value, error) {
 	if e, ok := aframe.entities[_id]; ok {
 		return e.Value(), nil
 	}
