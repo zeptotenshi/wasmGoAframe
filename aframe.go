@@ -14,7 +14,7 @@ type Aframe struct {
 var aframe *Aframe
 
 func init() {
-	aframe := &Aframe{
+	aframe = &Aframe{
 		entities: map[string]*AEntity{},
 	}
 
