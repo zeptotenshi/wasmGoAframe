@@ -1,4 +1,4 @@
-package goAframe
+package wasmGoAframe
 
 import (
 	"errors"
