@@ -50,6 +50,20 @@ func GetElementFromSceneById(_id string) (js.Value, error) {
 		return e.Value(), nil
 	}
 
+	if aframe.IsNull() || aframe.IsUndefined() {
+		getAframeGlobalRef()
+		if aframe.IsNull() || aframe.IsUndefined() {
+			return js.ValueOf(nil), errors.New("AFRAME global not found")
+		}
+	}
+
+	if aframe.scene.IsUndefined() || aframe.scene.IsNull() {
+		scene()
+		if aframe.scene.IsUndefined() || aframe.scene.IsNull() {
+			return js.ValueOf(nil), errors.New("scene element not found")
+		}
+	}
+
 	el := aframe.scene.Call("querySelector", "#"+_id)
 	if el.IsUndefined() {
 		return js.ValueOf(nil), errors.New(_id + " element undefined")
