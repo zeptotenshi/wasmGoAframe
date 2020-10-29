@@ -7,7 +7,7 @@ import (
 
 type Entity interface {
 	SetAttribute(string, map[string]interface{})
-	GetProperty(string) (js.Value, error)
+	GetProperty(...string) (js.Value, error)
 	GetAttribute(string) (js.Value, error)
 	ID() string
 	Tag() string
