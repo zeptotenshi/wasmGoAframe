@@ -6,9 +6,13 @@ import (
 )
 
 type Aframe struct {
-	js.Value
-	scene    js.Value
+	global js.Value
+	scene  js.Value
+	three  js.Value
+
 	entities map[string]*AEntity
+
+	skyboxes map[string]string
 }
 
 var aframe *Aframe
@@ -16,10 +20,12 @@ var aframe *Aframe
 func init() {
 	aframe = &Aframe{
 		entities: map[string]*AEntity{},
+		skyboxes: map[string]string{},
 	}
 
-	getAframeGlobalRef()
+	global()
 	scene()
+	three()
 }
 
 func getAframeGlobalRef() {
@@ -28,7 +34,7 @@ func getAframeGlobalRef() {
 		return
 	}
 
-	aframe.Value = a
+	aframe.global = a
 }
 
 func scene() {
@@ -40,6 +46,15 @@ func scene() {
 	}
 
 	aframe.scene = s
+}
+
+func three() {
+	t := js.Global().Get("THREE")
+	if t.IsUndefined() || t.IsNull() {
+		return
+	}
+
+	aframe.three = t
 }
 
 // func (a *Aframe) CreateEntity() AEntity {
