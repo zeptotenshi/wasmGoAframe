@@ -20,7 +20,7 @@ var aframe *Aframe
 func init() {
 	aframe = &Aframe{
 		entities: map[string]*AEntity{},
-		skyboxes: map[string]string{},
+		skyboxes: map[string]int{},
 	}
 
 	global()
@@ -28,7 +28,7 @@ func init() {
 	three()
 }
 
-func getAframeGlobalRef() {
+func global() {
 	a := js.Global().Get("AFRAME")
 	if a.IsUndefined() || a.IsNull() {
 		return
@@ -65,8 +65,8 @@ func GetElementFromSceneById(_id string) (js.Value, error) {
 		return e.Value(), nil
 	}
 
-	if aframe.IsNull() || aframe.IsUndefined() {
-		getAframeGlobalRef()
+	if aframe.global.IsNull() || aframe.global.IsUndefined() {
+		global()
 		if aframe.IsNull() || aframe.IsUndefined() {
 			return js.ValueOf(nil), errors.New("AFRAME global not found")
 		}
