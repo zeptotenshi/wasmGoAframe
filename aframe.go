@@ -67,7 +67,7 @@ func GetElementFromSceneById(_id string) (js.Value, error) {
 
 	if aframe.global.IsNull() || aframe.global.IsUndefined() {
 		global()
-		if aframe.IsNull() || aframe.IsUndefined() {
+		if aframe.global.IsNull() || aframe.global.IsUndefined() {
 			return js.ValueOf(nil), errors.New("AFRAME global not found")
 		}
 	}

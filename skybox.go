@@ -46,6 +46,9 @@ func newTexture(_src string) (js.Value, error) {
 		return texture, errors.New("'THREE_TextureLoader' js.Value null")
 	}
 
+	// create a new TextureLoader
+	textureLoader := THREE_TextureLoader.New()
+
 	// var err error
 
 	// texture = textureLoader.Call("load", _src, js.FuncOf(nil), js.FuncOf(nil), js.FuncOf(func(_this js.Value, _args []js.Value) interface{} {
