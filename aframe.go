@@ -12,7 +12,7 @@ type Aframe struct {
 
 	entities map[string]*AEntity
 
-	skyboxes map[string]string
+	skyboxes map[string]int
 }
 
 var aframe *Aframe

@@ -27,7 +27,7 @@ func init() {
 
 type Skybox struct {
 	Name string
-	Type string
+	uuid int
 
 	Images map[string]string
 
@@ -172,6 +172,11 @@ func (s *Skybox) SetAsSceneSkybox() error {
 		return errors.New("'skyboxMesh' js.Value null")
 	}
 
+	id := skyboxMesh.Get("id")
+	if id.IsUndefined() || id.IsNull() {
+		return errors.New("skyboxMesh id js.Value undefined/null")
+	}
+
 	sceneObj := aframe.scene.Get("object3D")
 	if sceneObj.IsUndefined() || sceneObj.IsNull() {
 		return errors.New("'scene.object3D' js.Value undefined/null")
@@ -179,7 +184,8 @@ func (s *Skybox) SetAsSceneSkybox() error {
 
 	sceneObj.Call("add", skyboxMesh)
 
-	aframe.skyboxes[s.Name] = s.Type
+	s.uuid = id.Int()
+	aframe.skyboxes[s.Name] = id.Int()
 
 	return nil
 }
