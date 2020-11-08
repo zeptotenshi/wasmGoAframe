@@ -16,7 +16,7 @@ var (
 )
 
 func init() {
-	faces = []string{"front", "back", "top", "bottom", "left", "right"}
+	faces = []string{"back", "front", "bottom", "top", "left", "right"}
 
 	THREE_BackSide = aframe.three.Get("BackSide")
 	THREE_Mesh = aframe.three.Get("Mesh")
